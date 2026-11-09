@@ -1,0 +1,640 @@
+// 中国教科书之窗 - 现代化大厂融合设计系统 (Design System)
+// 融合 Apple 极致留白与毛玻璃、Google M3 动态色彩与 Chips、Microsoft Fluent 深度层级
+
+@import './palette.scss';
+
+// ==========================================
+// 1. 全局排版与基础视觉
+// ==========================================
+html {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+// 优化选区颜色
+::selection {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: inherit;
+}
+
+// ==========================================
+// 2. 导航栏 (Apple 晶透毛玻璃质感)
+// ==========================================
+.vp-navbar {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+  transition: var(--vp-transition-ease) !important;
+
+  .vp-site-name {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-item > .nav-link {
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 6px 12px;
+    transition: var(--vp-transition-ease);
+
+    &:hover,
+    &.active {
+      color: var(--theme-color) !important;
+      background: var(--theme-color-mask);
+    }
+  }
+}
+
+[data-theme='dark'] .vp-navbar {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+  .vp-site-name {
+    background: linear-gradient(135deg, #f8fafc 0%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// 搜索栏优化 (Material 3 胶囊形态)
+.search-pro-box,
+.slimsearch-box {
+  .search-pro-button,
+  .search-box-input {
+    border-radius: 999px !important;
+    border: 1px solid rgba(203, 213, 225, 0.8) !important;
+    background: rgba(248, 250, 252, 0.85) !important;
+    transition: var(--vp-transition-ease) !important;
+
+    &:focus,
+    &:hover {
+      border-color: var(--theme-color) !important;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+      background: #ffffff !important;
+    }
+  }
+}
+
+// ==========================================
+// 3. 首页 Hero 区域 (Apple 级呼吸光晕与层级)
+// ==========================================
+.vp-page.home {
+  .vp-hero {
+    position: relative;
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(13, 148, 136, 0.05) 50%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .vp-hero-image {
+      filter: drop-shadow(0 20px 30px rgba(37, 99, 235, 0.18));
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        transform: scale(1.03) translateY(-4px);
+      }
+    }
+
+    h1#main-title {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+
+    .vp-hero-description {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #64748b;
+      line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto 1.8rem;
+    }
+
+    .vp-hero-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 0.85rem 2.2rem;
+      box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.38);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 28px -6px rgba(37, 99, 235, 0.48);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  // Features 卡片流 (Fluent 深度网格)
+  .vp-features {
+    padding: 2.5rem 0;
+    gap: 1.5rem;
+
+    .vp-feature {
+      background: var(--vp-c-card-bg);
+      border: 1px solid var(--vp-c-card-border);
+      border-radius: var(--vp-radius-md);
+      box-shadow: var(--vp-shadow-sm);
+      transition: var(--vp-transition-ease);
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--vp-shadow-hover);
+        border-color: var(--vp-c-card-hover-border);
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.6rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: #64748b;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] .vp-page.home {
+  .vp-hero h1#main-title {
+    background: linear-gradient(135deg, #f8fafc 0%, #93c5fd 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .vp-hero .vp-hero-description {
+    color: #94a3b8;
+  }
+  .vp-features .vp-feature {
+    h2 {
+      color: #f1f5f9;
+    }
+    p {
+      color: #94a3b8;
+    }
+    &::after {
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// ==========================================
+// 4. 定制化现代UI套件组件库 (CTB Components)
+// ==========================================
+
+// 4.1 灵动标签徽章 (Apple Pill Badge)
+.ctb-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  margin-bottom: 1rem;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2563eb;
+    box-shadow: 0 0 8px #2563eb;
+  }
+}
+
+// 4.2 平台指标与信赖背书矩阵 (Amazon/Google 高信任感组件)
+.ctb-stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0 3rem;
+
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
+  .ctb-stat-card {
+    background: var(--vp-c-card-bg);
+    border: 1px solid var(--vp-c-card-border);
+    border-radius: var(--vp-radius-md);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--vp-shadow-sm);
+    text-align: center;
+    transition: var(--vp-transition-ease);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--vp-shadow-md);
+      border-color: var(--vp-c-card-hover-border);
+    }
+
+    .number {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #2563eb, #0d9488);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .label {
+      font-size: 0.88rem;
+      color: #64748b;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+  }
+}
+
+// 4.3 核心学段全景交互卡片群 (Fluent Grid Tiles)
+.ctb-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0 3rem;
+}
+
+.ctb-stage-card {
+  position: relative;
+  background: var(--vp-c-card-bg);
+  border: 1px solid var(--vp-c-card-border);
+  border-radius: var(--vp-radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--vp-shadow-sm);
+  transition: var(--vp-transition-ease);
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--card-accent, #2563eb);
+    opacity: 0.8;
+    transition: height 0.25s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--vp-shadow-hover);
+    border-color: var(--vp-c-card-hover-border);
+
+    &::before {
+      height: 6px;
+    }
+
+    .ctb-arrow-link {
+      transform: translateX(4px);
+      color: var(--card-accent, #2563eb);
+    }
+  }
+
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--icon-bg, rgba(37, 99, 235, 0.1));
+    color: var(--card-accent, #2563eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+  }
+
+  .desc {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+
+    span {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(100, 116, 139, 0.08);
+      color: #475569;
+      font-weight: 500;
+    }
+  }
+
+  .ctb-arrow-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease;
+  }
+}
+
+[data-theme='dark'] .ctb-stage-card {
+  .title {
+    color: #f8fafc;
+  }
+  .desc {
+    color: #94a3b8;
+  }
+  .tags span {
+    background: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+  }
+}
+
+// 4.4 Google Material 3 风格标签筛选芯片 (Chips)
+.ctb-filter-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1rem 0 1.5rem;
+
+  .ctb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    background: var(--vp-c-card-bg);
+    border: 1px solid var(--vp-c-card-border);
+    color: #475569;
+    text-decoration: none !important;
+    transition: var(--vp-transition-ease);
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background: #2563eb;
+      color: #ffffff !important;
+      border-color: #2563eb;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+    }
+  }
+}
+
+// 4.5 极速学科/版本展示卡片网格
+.ctb-subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.ctb-subject-card {
+  background: var(--vp-c-card-bg);
+  border: 1px solid var(--vp-c-card-border);
+  border-radius: var(--vp-radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--vp-shadow-sm);
+  transition: var(--vp-transition-ease);
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--vp-shadow-md);
+    border-color: var(--vp-c-card-hover-border);
+
+    .icon-box {
+      transform: scale(1.1);
+    }
+  }
+
+  .icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .content {
+    h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    p {
+      margin: 2px 0 0;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  }
+}
+
+[data-theme='dark'] .ctb-subject-card {
+  .content h4 {
+    color: #f8fafc;
+  }
+  .content p {
+    color: #94a3b8;
+  }
+}
+
+// 4.6 现代教育资源行动 Callout / 快速预览横幅
+.ctb-action-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.07) 0%, rgba(13, 148, 136, 0.05) 100%);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: var(--vp-radius-lg);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner-text {
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+  }
+
+  .banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    background: #2563eb;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    text-decoration: none !important;
+    transition: var(--vp-transition-ease);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+    }
+  }
+}
+
+[data-theme='dark'] .ctb-action-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%);
+  border-color: rgba(96, 165, 250, 0.2);
+
+  .banner-text h3 {
+    color: #f8fafc;
+  }
+  .banner-text p {
+    color: #94a3b8;
+  }
+}
+
+// 4.7 比较表格与信息矩阵优化
+.vp-doc table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--vp-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--vp-c-card-border);
+  box-shadow: var(--vp-shadow-sm);
+  margin: 1.5rem 0;
+
+  thead tr {
+    background: rgba(248, 250, 252, 0.95);
+    th {
+      font-weight: 600;
+      color: #1e293b;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--vp-c-card-border);
+    }
+  }
+
+  tbody tr {
+    transition: background 0.2s ease;
+    &:hover {
+      background: rgba(37, 99, 235, 0.03);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--vp-c-card-border);
+      color: #334155;
+    }
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+[data-theme='dark'] .vp-doc table {
+  thead tr {
+    background: rgba(30, 41, 59, 0.85);
+    th {
+      color: #f1f5f9;
+    }
+  }
+  tbody tr {
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+    td {
+      color: #cbd5e1;
+    }
+  }
+}

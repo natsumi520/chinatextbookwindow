@@ -1,0 +1,53 @@
+// 中国教科书之窗 - 全局设计变量系统 (Design Tokens)
+// 融合 Apple 现代简约、Material Design 3 动态色彩与 Microsoft Fluent 质感
+
+$theme-color: #2563eb;
+
+:root {
+  --theme-color: #2563eb;
+  --theme-color-light: #3b82f6;
+  --theme-color-dark: #1d4ed8;
+  --theme-color-mask: rgba(37, 99, 235, 0.08);
+
+  // 辅助色彩系统 (Google M3 Tonal Palette)
+  --color-teal: #0d9488;
+  --color-amber: #f59e0b;
+  --color-rose: #f43f5e;
+  --color-indigo: #6366f1;
+
+  // 表面层次 (Elevation & Surface)
+  --vp-c-bg-subtle: #f8fafc;
+  --vp-c-card-bg: rgba(255, 255, 255, 0.92);
+  --vp-c-card-border: rgba(226, 232, 240, 0.85);
+  --vp-c-card-hover-border: rgba(37, 99, 235, 0.35);
+  
+  // 弥散光影与投影 (Fluent Depth System)
+  --vp-shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+  --vp-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --vp-shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  --vp-shadow-hover: 0 20px 30px -6px rgba(37, 99, 235, 0.12), 0 8px 12px -4px rgba(15, 23, 42, 0.06);
+
+  // 动效缓动 (Apple Spring Ease)
+  --vp-transition-ease: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --vp-radius-sm: 8px;
+  --vp-radius-md: 14px;
+  --vp-radius-lg: 20px;
+  --vp-radius-xl: 28px;
+}
+
+[data-theme='dark'] {
+  --theme-color: #3b82f6;
+  --theme-color-light: #60a5fa;
+  --theme-color-dark: #2563eb;
+  --theme-color-mask: rgba(59, 130, 246, 0.12);
+
+  --vp-c-bg-subtle: #0b0f19;
+  --vp-c-card-bg: rgba(30, 41, 59, 0.85);
+  --vp-c-card-border: rgba(255, 255, 255, 0.08);
+  --vp-c-card-hover-border: rgba(96, 165, 250, 0.45);
+
+  --vp-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --vp-shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
+  --vp-shadow-lg: 0 14px 28px -4px rgba(0, 0, 0, 0.5);
+  --vp-shadow-hover: 0 20px 35px -6px rgba(59, 130, 246, 0.25);
+}
