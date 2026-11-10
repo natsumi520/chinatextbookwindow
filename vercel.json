@@ -1,6 +1,5 @@
 {
     "buildCommand": "vuepress build docs",
     "installCommand": "npm install --legacy-peer-deps",
-    "nodeVersion": 20,
     "outputDirectory": "docs/.vuepress/dist"
 }
