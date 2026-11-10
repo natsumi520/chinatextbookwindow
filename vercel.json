@@ -1,9 +1,5 @@
 {
     "buildCommand": "vuepress build docs",
     "installCommand": "npm install --legacy-peer-deps",
-    "outputDirectory": "docs/.vuepress/dist",
-    "cache": {
-        "enabled": true,
-        "key": "v1-${hash:package-lock.json}"
-    }
+    "outputDirectory": "docs/.vuepress/dist"
 }
