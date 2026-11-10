@@ -1,7 +1,6 @@
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { hopeTheme } from 'vuepress-theme-hope'
-import { slimsearchPlugin } from '@vuepress/plugin-slimsearch'
 
 export default defineUserConfig({
     bundler: viteBundler(),
@@ -15,40 +14,43 @@ export default defineUserConfig({
         ['link', { rel: 'apple-touch-icon', href: '/logo.png' }]
     ],
 
-    // 全局插件：slimsearch 放在这里才是正确的
-    plugins: [
-        slimsearchPlugin({
-            indexContent: true,
-            customFields: [
-                {
-                    getter: (page) => page.title,
-                    formatter: 'Title: $content'
-                },
-                {
-                    getter: (page) => page.frontmatter.version || '',
-                    formatter: '版本: $content'
-                },
-                {
-                    getter: (page) => page.frontmatter.stage || '',
-                    formatter: '学段: $content'
-                }
-            ],
-            locales: {
-                '/': {
-                    placeholder: '搜索教材、学科、版本...'
-                }
-            },
-            maxSuggestions: 15
-        })
-    ],
+    // 移除全局的slimsearchPlugin注册，避免和主题内置插件冲突
+    // 所有搜索配置全部迁移到主题的plugins.slimsearch字段下
 
     theme: hopeTheme({
         lang: 'zh-CN',
-        icon: "/favicon.ico",
-        appleIcon: "/apple-touch-icon.png",
+        icon: "/logo.png",
+        appleIcon: "/logo.png",
         // 自动侧边栏开启
         autoSidebar: true,
         sidebarIcon: true,
+
+        // 在这里完整迁移所有slimsearch自定义配置
+        plugins: {
+            slimsearch: {
+                indexContent: true,
+                customFields: [
+                    {
+                        getter: (page) => page.title,
+                        formatter: 'Title: $content'
+                    },
+                    {
+                        getter: (page) => page.frontmatter.version || '',
+                        formatter: '版本: $content'
+                    },
+                    {
+                        getter: (page) => page.frontmatter.stage || '',
+                        formatter: '学段: $content'
+                    }
+                ],
+                locales: {
+                    '/': {
+                        placeholder: '搜索教材、学科、版本...'
+                    }
+                },
+                maxSuggestions: 15
+            }
+        },
 
         navbar: [
             { text: "首页", link: "/" },
